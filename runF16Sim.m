@@ -129,7 +129,7 @@ aileron = 0.01;         % aileron, degrees
 
 sim( 'F16Block' ,[TStart TFinal]);
 
-trim_file = sprintf('%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, fi_type, altitude, velocity);
+trim_file = sprintf('output/%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, fi_type, altitude, velocity);
 
 fid_trim = fopen(trim_file, 'w');
 

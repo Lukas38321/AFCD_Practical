@@ -205,7 +205,7 @@ if (lofiID > 0 & hifiID > 0)
      
 else
     
-    new_data_file = sprintf('%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, fi_type, altitude, velocity);
+    new_data_file = sprintf('output/%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, fi_type, altitude, velocity);
     [time_new, npos_new, epos_new, alt_new, phi_new, theta_new, psi_new, vel_new, alpha_new, sideslip_new, roll_new, pitch_new, yaw_new, nx_new, ny_new, nz_new, mach_new, qbar_new, ps_new, thrust_new, ele_new, ail_new, rud_new] = textread(new_data_file,'%f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f %f', 'delimiter', ',' , 'headerlines',3);
     
     % Plot angle of attack v. time

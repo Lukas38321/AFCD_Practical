@@ -7,8 +7,8 @@ global altitude velocity fi_type;
 global surface1 surface2 surface3;
 global ElevatorDis AileronDis RudderDis;
 
-lofi_data_file = sprintf('%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, 'lofi', altitude, velocity);
-hifi_data_file = sprintf('%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, 'hifi', altitude, velocity);
+lofi_data_file = sprintf('output/%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, 'lofi', altitude, velocity);
+hifi_data_file = sprintf('output/%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f.txt', surface1, ElevatorDis, surface2, AileronDis, surface3, RudderDis, 'hifi', altitude, velocity);
 
 lofiID = fopen(lofi_data_file);
 hifiID = fopen(hifi_data_file);

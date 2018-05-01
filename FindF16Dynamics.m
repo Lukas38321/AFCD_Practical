@@ -319,3 +319,6 @@ for state = 1:1:6
         pause;
     end
 end
+
+% save separated low-fidelity state space model matrices for later use
+save sep_lofi_ss A_lateral_lo A_longitude_lo B_lateral_lo B_longitude_lo C_lateral_lo C_longitude_lo D_lateral_lo D_longitude_lo

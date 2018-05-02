@@ -87,7 +87,7 @@ trim_state_lin = trim_state_lo; trim_thrust_lin = trim_thrust_lo; trim_control_l
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Save State Space and eigenvalues to file
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-trim_file = sprintf('output/StateSpace_alt%.0f_vel%.0f.txt', altitude, velocity);
+trim_file = sprintf('output/StateSpace_alt%.0f_vel%.0f_ACC.txt', altitude, velocity);
 fid_trim = fopen(trim_file, 'w');
 %% For Hifi
 %% Print A
@@ -247,7 +247,7 @@ for fi_flag_Simulink = 0:1:1
      
     sim( 'SS_F16_Block_ACC' ,[TStart TFinal]);
     
-    trim_file = sprintf('output/%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f_LTI.txt', 'ele_', ElevatorDis, 'ail_', AileronDis, 'rud_', RudderDis, fi_model, altitude, velocity);
+    trim_file = sprintf('output/%s%.3f%s%.3f%s%.3f_%smodel_alt%0.f_vel%.0f_LTI_ACC.txt', 'ele_', ElevatorDis, 'ail_', AileronDis, 'rud_', RudderDis, fi_model, altitude, velocity);
     fid_trim = fopen(trim_file, 'w');
     
     heading = sprintf('\ntime,npos,epos,alt,phi,theta,psi,vel,alpha,beta,p,q,r,nx,ny,nz,mach,qbar,ps,thrust,ele,ail,rud\n\n');
@@ -279,5 +279,5 @@ plot_flag = input('Plot results (y/n):  ', 's');
 if plot_flag == 'n'
     %break;
 else
-    graphF16_all;
+    graphF16_all_ACC;
 end

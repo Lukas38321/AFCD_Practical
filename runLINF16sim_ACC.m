@@ -59,7 +59,7 @@ aileron = 0.01;            % aileron, degrees
 
 %% Parameters for accelerometer
 %%
-xa = 0;                 % accelerometer position, ft
+xa = 5;                 % accelerometer position, ft
 gD = 9.80665;           % earth acceleration
 
 %% Find trim for Hifi model at desired altitude and velocity

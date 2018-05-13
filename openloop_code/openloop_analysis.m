@@ -7,6 +7,7 @@
 %   Author: Lukas
 % 
 %==========================================================================
+clear; 
 
 % import matrices
 load redu_ss
@@ -16,8 +17,8 @@ v0 = 600; %[ft/s]
 
 % set plotting/display parameters
 pzmaps          = false;
-characteristics = true;
-simulations     = false;
+characteristics = false;
+simulations     = true;
 
 % ------------------SS matrices--------------------------------------------
 
@@ -45,14 +46,13 @@ if pzmaps
     % LONGITUDINAL
     figure(1); 
     pzmap(SS_lon);
-    title("Symmetric Eigenmotions");
     print -depsc2 -r1200 Figures/pzmap_sym
     
     % LATERAL
     figure(2); 
     pzmap(SS_lat);
-    title("Asymmetric Eigenmotions");
     print -depsc2 -r1200 Figures/pzmap_asym
+    
 end
 
 % ------------------characteristics----------------------------------------
@@ -104,6 +104,10 @@ end
 
 if simulations
     
+    % figure parameters for printing
+    simfig_width    = 1000;
+    simfig_height   = 400;
+    
     % lsim parameters for pulse-shaped inputs
     T = 10; % observaton period [s]
     dt = 0.01; % sampling time [s]
@@ -132,6 +136,7 @@ if simulations
     theta_sp = y_sp(:,1);
     q_sp = y_sp(:,4);
     
+    figure('pos',[100 100 simfig_width simfig_height/2])
     figure(1)
     plot(t_sp,q_sp)
     xlabel('t [sec]')
@@ -144,6 +149,7 @@ if simulations
     v_ph = y_ph(:,2) + v0; % trim velocity added
     alpha_ph = y_ph(:,3);
     
+    figure('pos',[100 100 simfig_width simfig_height])
     figure(2)
     subplot(2,1,1)
     plot(t_ph,v_ph)
@@ -166,6 +172,7 @@ if simulations
     p_dr = y_dr(:,3);
     r_dr = y_dr(:,4);
     
+    figure('pos',[100 100 simfig_width simfig_height])
     figure(3)
     subplot(2,1,1)
     plot(t,p_dr)
@@ -195,6 +202,7 @@ if simulations
     y_spir = lsim(SS_lat,sig_spir,t);
     phi_spir = y_spir(:,1);
     
+    figure('pos',[100 100 simfig_width simfig_height])
     figure(4)
     subplot(2,1,1)
     plot(t,p_ap)

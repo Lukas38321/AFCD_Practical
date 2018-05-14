@@ -281,3 +281,6 @@ if plot_flag == 'n'
 else
     graphF16_all_ACC;
 end
+
+save variables_chpt5
+

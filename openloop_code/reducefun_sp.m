@@ -21,12 +21,4 @@ C_lon_sp = C_lon_ac([3,4],[3,4]);
 
 D_lon_sp = D_lon_ac([3,4],:);
 
-
-states_lon    = {'alpha' 'q'};
-inputs_lon    = {'elevator'};
-outputs_lon   = {'alpha' 'q'};
-SS_lon_chpt7 = ss(A_lon_sp, B_lon_sp, C_lon_sp, D_lon_sp,...
-            'statename',states_lon,...
-            'inputname',inputs_lon,...
-            'outputname',outputs_lon);
 save redu_ss_sp A_lon_sp B_lon_sp C_lon_sp D_lon_sp

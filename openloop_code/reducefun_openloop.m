@@ -7,10 +7,11 @@
 %   Author: Lukas
 % 
 %================================================
+clear;
 
 
 % load low-fidelity state space matrices created by FindF16Dynamics.m
-load sep_lofi_ss
+load sep_lofi_ss_openloop
 
 % -------------------longitudinal----------------
 
@@ -50,7 +51,7 @@ B_lat = B_lat_ac;
 C_lat = C_lat_ac;
 D_lat = D_lat_ac;
 
-save redu_ss A_lon B_lon C_lon D_lon A_lat B_lat C_lat D_lat
+save redu_ss_openloop A_lon B_lon C_lon D_lon A_lat B_lat C_lat D_lat
 
 
 

@@ -10,7 +10,7 @@
 clear; 
 
 % import matrices
-load redu_ss
+load redu_ss_openloop
 
 % define trim point
 v0 = 600; %[ft/s]

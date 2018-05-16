@@ -59,7 +59,7 @@ aileron = 0.01;            % aileron, degrees
 
 %% Parameters for accelerometer
 %%
-xa = 5;                 % accelerometer position, ft
+xa = 0;                 % accelerometer position, ft (possible values: [0, 5, 5.9, 6, 7, 15])
 gD = 9.80665;           % earth acceleration
 
 %% Find trim for Hifi model at desired altitude and velocity
@@ -282,5 +282,10 @@ else
     graphF16_all_ACC;
 end
 
-save('Chapter_5/variables_chpt5')
+%% Output files for chapter 5
+%{
+fname = sprintf('Chapter_5/variables_chpt5_%g.mat', xa);
+save(fname);
+
+%}
 

@@ -323,4 +323,3 @@ end
 % save separated low-fidelity state space model matrices for later use
 save output/sep_lofi_ss A_lateral_lo A_longitude_lo B_lateral_lo B_longitude_lo C_lateral_lo C_longitude_lo D_lateral_lo D_longitude_lo
 save output/trim_lo trim_state_lo trim_control_lo trim_thrust_lo
-save output/full_lofi_ss A_lo B_lo C_lo D_lo

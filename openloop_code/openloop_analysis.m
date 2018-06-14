@@ -18,7 +18,7 @@ v0 = 600; %[ft/s]
 % set plotting/display parameters
 pzmaps          = false;
 characteristics = false;
-simulations     = true;
+simulations     = false;
 
 % ------------------SS matrices--------------------------------------------
 

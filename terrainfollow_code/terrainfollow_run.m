@@ -43,7 +43,7 @@ w_q  = 1;
 
 % assemble Q and R matrix
 Q_f = diag([w_h, w_th, w_v, w_a, w_q]);
-R_f = diag([0.001 10]);
+R_f = diag([0.001 15]);
 
 K_f = lqr(A,B,Q_f,R_f); % full outer matrix
 
@@ -57,6 +57,76 @@ K_i = K_f(:,2:5);
 
 open_system('terrainfollow_sim')
 sim('terrainfollow_sim')
+
+% -------------------plot figures------------------------------------------
+
+% altitude figure
+figure('pos',[100 100 1200 800]) 
+
+% flightpath(distance)
+subplot(2,1,1)
+hold on
+plot(distance.data(:,1),flightpath.data(:,3),distance.data(:,1),flightpath.data(:,2),':k')
+canyon = area(distance.data(:,1),flightpath.data(:,1));
+hold off
+canyon.FaceColor = [0.5 0.5 0.5];
+axis([0,5000,1300,1550])
+title('Flight Path')
+xlabel('Position [m]')
+ylabel('Altitude [m]')
+legend('Flight Path','Reference Altitude','Canyon Profile','Location','southeast')
+grid on
+
+% altitude error(distance)
+subplot(2,1,2)
+hold on
+alterr = plot(distance.data(:,1),alt_error.data(:,3));
+uplim  = plot(distance.data(:,1),alt_error.data(:,2),':k');
+lowlim = plot(distance.data(:,1),alt_error.data(:,1),':k');
+hold off
+axis([0,5000,-20,20])
+title('Tracking Performance')
+xlabel('Position [m]')
+ylabel('Error [m]')
+legend([alterr,uplim],{'Altitude Error','Overshoot Limits'},'Location','southeast')
+grid on
+
+print -depsc2 -r1200 figures/flightpath_err
+
+
+% Actuator Figure
+figure('pos',[100 100 1200 800])
+
+% thrust setting(time)
+subplot(2,1,1)
+hold on
+thrustset   = plot(thrust.time,thrust.data(:,1));
+uplim       = plot(thrust.time,thrust.data(:,2),':k');
+lowlim      = plot(thrust.time,thrust.data(:,3),':k');
+hold off
+axis([0,60,-2500,17000])
+title('Thrust Input')
+xlabel('Time [s]')
+ylabel('Thrust Setting [lb]')
+legend([thrustset,uplim],{'Thrust Setting','Saturation Limits'},'Location','northeast')
+grid on
+
+% thrust setting(time)
+subplot(2,1,2)
+hold on
+thrustset   = plot(elevator.time,elevator.data(:,1));
+uplim       = plot(elevator.time,elevator.data(:,2),':k');
+lowlim      = plot(elevator.time,elevator.data(:,3),':k');
+hold off
+axis([0,60,-30,35])
+title('Elevator Input')
+xlabel('Time [s]')
+ylabel('Deflection [deg]')
+legend([thrustset,uplim],{'Commanded Deflection','Saturation Limits'},'Location','northeast')
+grid on
+
+print -depsc2 -r1200 figures/control_inputs
+
 
 
 

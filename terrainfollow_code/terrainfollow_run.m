@@ -7,7 +7,6 @@
 %==========================================================================
 clear;
 
-
 % load reduced longitudinal state-space matrices and trim state
 
 load redu_ss_terrainfollow
@@ -101,28 +100,28 @@ figure('pos',[100 100 1200 800])
 subplot(2,1,1)
 hold on
 thrustset   = plot(thrust.time,thrust.data(:,1));
-uplim       = plot(thrust.time,thrust.data(:,2),':k');
-lowlim      = plot(thrust.time,thrust.data(:,3),':k');
+uplim_th    = plot(thrust.time,thrust.data(:,2),':k');
+lowlim_th   = plot(thrust.time,thrust.data(:,3),':k');
 hold off
 axis([0,60,-2500,17000])
 title('Thrust Input')
 xlabel('Time [s]')
 ylabel('Thrust Setting [lb]')
-legend([thrustset,uplim],{'Thrust Setting','Saturation Limits'},'Location','northeast')
+legend([thrustset,uplim_th],{'Thrust Setting','Saturation Limits'},'Location','northeast')
 grid on
 
-% thrust setting(time)
+% elevator deflection(time)
 subplot(2,1,2)
 hold on
-thrustset   = plot(elevator.time,elevator.data(:,1));
-uplim       = plot(elevator.time,elevator.data(:,2),':k');
-lowlim      = plot(elevator.time,elevator.data(:,3),':k');
+eleset      = plot(elevator.time,elevator.data(:,1));
+uplim_ele   = plot(elevator.time,elevator.data(:,2),':k');
+lowlim_ele  = plot(elevator.time,elevator.data(:,3),':k');
 hold off
 axis([0,60,-30,35])
 title('Elevator Input')
 xlabel('Time [s]')
 ylabel('Deflection [deg]')
-legend([thrustset,uplim],{'Commanded Deflection','Saturation Limits'},'Location','northeast')
+legend([eleset,uplim_ele],{'Commanded Deflection','Saturation Limits'},'Location','northeast')
 grid on
 
 print -depsc2 -r1200 figures/control_inputs

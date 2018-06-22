@@ -1,4 +1,4 @@
-5%==========================================================================
+%==========================================================================
 %   This programm calculates the inherent motion
 %   characteristics of the reduced F-16 model
 %   - periodic: short period, phugoid, Dutch roll
@@ -16,7 +16,7 @@ load redu_ss_openloop
 v0 = 600; %[ft/s]
 
 % set plotting/display parameters
-pzmaps          = false;
+pzmaps          = true;
 characteristics = false;
 simulations     = false;
 

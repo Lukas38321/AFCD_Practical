@@ -20,7 +20,7 @@ ft2m      = 0.3048;
 h0  = 1500;  % initial altitude [m]
 v0  = ft2m*trim_state_lo(7); % initial speed [m/s]
 th0 = trim_thrust_lo; % trim thrust setting [lb]
-de0 = trim_control_lo(1); % trim elevator deflection [rad]
+de0 = trim_control_lo(1); % trim elevator deflection [deg]
 
 gclear = 40;    % ground clearance [m]
 
@@ -31,7 +31,7 @@ ele_uplim  = 25     - de0;
 th_lowlim  = 1000   - th0;
 th_uplim   = 19000  - th0;
 
-% -------------------LQR Controller----------------------------------------
+% -------------------LQR Outer---------------------------------------------
 
 % assign weights
 w_h  = 100;
@@ -42,15 +42,15 @@ w_q  = 1;
 
 % assemble Q and R matrix
 Q_f = diag([w_h, w_th, w_v, w_a, w_q]);
-R_f = diag([0.001 15]);
+R_f = diag([0.0015 15]);
 
 K_f = lqr(A,B,Q_f,R_f); % full outer matrix
 
 % crop outer LQR matrix
 K_o = K_f(:,1);
 
-% crop inner LQR matrix
 K_i = K_f(:,2:5);
+
 
 % -------------------run simulation----------------------------------------
 
@@ -103,7 +103,7 @@ thrustset   = plot(thrust.time,thrust.data(:,1));
 uplim_th    = plot(thrust.time,thrust.data(:,2),':k');
 lowlim_th   = plot(thrust.time,thrust.data(:,3),':k');
 hold off
-axis([0,60,-2500,17000])
+axis([0,60,-2500,2000])
 title('Thrust Input')
 xlabel('Time [s]')
 ylabel('Thrust Setting [lb]')

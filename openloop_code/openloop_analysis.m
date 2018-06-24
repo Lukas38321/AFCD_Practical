@@ -16,9 +16,9 @@ load redu_ss_openloop
 v0 = 600; %[ft/s]
 
 % set plotting/display parameters
-pzmaps          = true;
+pzmaps          = false;
 characteristics = false;
-simulations     = false;
+simulations     = true;
 
 % ------------------SS matrices--------------------------------------------
 
@@ -110,6 +110,7 @@ if simulations
     
     % lsim parameters for pulse-shaped inputs
     T = 10; % observaton period [s]
+    T_spir = 100; % observation period for spiral [s]
     dt = 0.01; % sampling time [s]
     
     % pulse parameters
@@ -120,15 +121,18 @@ if simulations
     m_rud = rad2deg(0.025); % rudder pulse magnitude [deg]
     
     % define time axis
-    t  = 0:dt:T; N = length(t);
+    t  = 0:dt:T; N = length(t); 
+    t_spir = 0:dt:T_spir; N_spir = length(t_spir);
     
     % create signals
     N_ail = d_ail/dt;
     N_rud = d_rud/dt;
     
     sig_ail  = [m_ail*ones(1,N_ail),zeros(1,N-N_ail)];
+    sig_ail_spir = [m_ail*ones(1,N_ail),zeros(1,N_spir-N_ail)];
     sig_rud  = [m_rud*ones(1,N_rud),zeros(1,N-N_rud)];
     sig_null = zeros(1,N);
+    sig_null_spir = zeros(1,N_spir);
     
     
     % SHORT PERIOD
@@ -193,29 +197,31 @@ if simulations
     y_ap = lsim(SS_lat,sig_ap,t);
     p_ap = y_ap(:,3);
     
+    figure('pos',[100 100 simfig_width simfig_height/2])
+    figure(4)
+    plot(t,p_ap)
+    xlabel('t [sec]')
+    ylabel('p [deg/sec]')
+    grid on
+    print -depsc2 -r1200 Figures/aperoll
+    
+    
     % (Plot combined with spiral)
     
     % SPIRAL
     % use aileron pulse
     
-    sig_spir = [sig_ail',sig_null'];
-    y_spir = lsim(SS_lat,sig_spir,t);
+    sig_spir = [sig_ail_spir',sig_null_spir'];
+    y_spir = lsim(SS_lat,sig_spir,t_spir);
     phi_spir = y_spir(:,1);
     
-    figure('pos',[100 100 simfig_width simfig_height])
-    figure(4)
-    subplot(2,1,1)
-    plot(t,p_ap)
-    xlabel('t [sec]')
-    ylabel('p [deg/sec]')
-    grid on
-    
-    subplot(2,1,2)
-    plot(t,phi_spir)
+    figure('pos',[100 100 simfig_width simfig_height/2])
+    figure(5)
+    plot(t_spir,phi_spir)
     xlabel('t [sec]')
     ylabel('\phi [deg]')
     grid on
-    print -depsc2 -r1200 Figures/aperoll_spiral
+    print -depsc2 -r1200 Figures/spiral
     
 end
 

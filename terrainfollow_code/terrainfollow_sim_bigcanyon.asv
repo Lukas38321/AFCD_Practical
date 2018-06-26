@@ -54,8 +54,8 @@ K_i = K_f(:,2:5);
 
 % -------------------run simulation----------------------------------------
 
-open_system('terrainfollow_revised')
-sim('terrainfollow_revised')
+% open_system('terrainfollow_bigcanyon')
+sim('terrainfollow_bigcanyon')
 
 % -------------------plot figures------------------------------------------
 
@@ -69,7 +69,7 @@ plot(distance.data(:,1),flightpath.data(:,3),distance.data(:,1),flightpath.data(
 canyon = area(distance.data(:,1),flightpath.data(:,1));
 hold off
 canyon.FaceColor = [0.5 0.5 0.5];
-axis([0,5000,1300,1550])
+axis([0,13000,0,1000])
 title('Flight Path')
 xlabel('Position [m]')
 ylabel('Altitude [m]')
@@ -83,14 +83,14 @@ alterr = plot(distance.data(:,1),alt_error.data(:,3));
 uplim  = plot(distance.data(:,1),alt_error.data(:,2),':k');
 lowlim = plot(distance.data(:,1),alt_error.data(:,1),':k');
 hold off
-axis([0,5000,-20,20])
+xlim([0 13000])
 title('Tracking Performance')
 xlabel('Position [m]')
 ylabel('Error [m]')
 legend([alterr,uplim],{'Altitude Error','Overshoot Limits'},'Location','southeast')
 grid on
 
-print -depsc2 -r1200 figures/flightpath_err
+print -depsc2 -r1200 figures/flightpath_err_bigcanyon
 
 
 % Actuator Figure
@@ -99,32 +99,33 @@ figure('pos',[100 100 1200 800])
 % thrust setting(time)
 subplot(2,1,1)
 hold on
-thrustset   = plot(thrust.time,thrust.data(:,1));
-uplim_th    = plot(thrust.time,thrust.data(:,2),':k');
-lowlim_th   = plot(thrust.time,thrust.data(:,3),':k');
+ele_tot     = plot(ele_inputs.time,ele_inputs.data(:,1));
+ele_out     = plot(ele_inputs.time,ele_inputs.data(:,2));
+ele_in      = plot(ele_inputs.time,ele_inputs.data(:,3));
 hold off
-axis([0,60,-2500,2000])
-title('Thrust Input')
+% axis([0,120,-5000,5000])
+title('Elevator Input')
 xlabel('Time [s]')
-ylabel('Thrust Setting [lb]')
-legend([thrustset,uplim_th],{'Thrust Setting','Saturation Limits'},'Location','northeast')
-grid on
+ylabel('Elevator deflection [deg]')
+legend('Sum','Outer Loop','Inner Loop','Location','northeast')
+xlim([0 140])
+grid minor
 
 % elevator deflection(time)
 subplot(2,1,2)
 hold on
-eleset      = plot(elevator.time,elevator.data(:,1));
-uplim_ele   = plot(elevator.time,elevator.data(:,2),':k');
-lowlim_ele  = plot(elevator.time,elevator.data(:,3),':k');
+ele_tot     = plot(ele_inputs.time,ele_inputs.data(:,1));
 hold off
-axis([0,60,-30,35])
-title('Elevator Input')
+% axis([0,120,-5000,5000])
+title('Elevator Input (Detail)')
 xlabel('Time [s]')
-ylabel('Deflection [deg]')
-legend([eleset,uplim_ele],{'Commanded Deflection','Saturation Limits'},'Location','northeast')
-grid on
+ylabel('Elevator deflection [deg]')
+legend('Sum','Location','northeast')
+ylim([-2 2])
+xlim([0 140])
+grid minor
 
-print -depsc2 -r1200 figures/control_inputs
+print -depsc2 -r1200 figures/ele_inputs_bigcanyon
 
 
 

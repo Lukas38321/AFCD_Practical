@@ -12,7 +12,7 @@
 clear; 
 
 % import matrices
-load redu_ss 
+load redu_ss_openloop 
 load redu_ss_sp
 
 
@@ -397,27 +397,4 @@ legend('Pitch rate response', 'step input', 'Location', 'southeast')
 xlabel('t [sec]')
 ylabel('q [deg/s]')
 grid on
-
-
-
-%% ######### Not sure about this yet ###########
-%%
-
-%{
-trans_matrix_redu = tf(SS_lon_2s);
-q_to_ele = trans_matrix_redu(2, 1);
-
-
-[num, den] = tfdata(SS_lon_2s);
-
-K_a = num{1}(3);
-
-K_q = num{2}(3);
-T_theta2 = num{2}(2)/K_q;
-w_n_sp = sqrt(den{2}(3));
-
-pol = pole(SS_lon_2s);
-[Wn, Zeta] = damp(SS_lon_2s);
-
-%}
 

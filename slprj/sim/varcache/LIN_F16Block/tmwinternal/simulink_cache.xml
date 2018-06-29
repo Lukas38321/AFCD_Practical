@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1">
+<<<<<<< HEAD
   <slcache.FileAttributes type="slcache.FileAttributes" uuid="49b87faf-1ac8-47a7-8086-9ee95bdf99a4">
     <checksum>EXX0pDYke1bEw2I8bf+Gdg==</checksum>
+=======
+  <slcache.FileAttributes type="slcache.FileAttributes" uuid="4c49eb0c-5109-4d8d-a772-4663ecb4c10d">
+    <checksum>w1VwotuS+QsT7D5kExJuoQ==</checksum>
+>>>>>>> Gervase
   </slcache.FileAttributes>
 </MF0>

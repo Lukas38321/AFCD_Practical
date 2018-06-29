@@ -42,7 +42,7 @@ w_q  = 1;
 
 % assemble Q and R matrix
 Q_f = diag([w_h, w_th, w_v, w_a, w_q]);
-R_f = diag([0.0015 15]);
+R_f = diag([0.001 15]);
 
 K_f = lqr(A,B,Q_f,R_f); % full outer matrix
 
